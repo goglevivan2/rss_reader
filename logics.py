@@ -58,9 +58,12 @@ def getInfo(rss_url,limit):
     return headlines
 
 def scissors(text):
-    marker = text.find('-/https:')
-    text = text[marker+1:]
-    del marker
+    try:
+        marker = text.find('-/https:')
+        text = text[marker+1:]
+        del marker
+    except:
+        text
     return text
 
 

@@ -1,13 +1,23 @@
 import argparse
 import logics
 import os
+import version
+import sys
 
 parser = argparse.ArgumentParser(description='RSS Newsreader system')
 parser.add_argument(
-    'chars',
+    '--version',
+    help='Print version info',
+    action='store_true'
+
+)
+parser.add_argument(
+
+    'source',
     type=str,
-    default='http://news.yahoo.com/rss/',
-    help='newslink on RSS'
+    #nargs='*',
+    help='newslink on RSS',
+
 )
 
 parser.add_argument(
@@ -16,6 +26,8 @@ parser.add_argument(
     action='store_true'
 
 )
+
+
 
 parser.add_argument(
     '--limit',
@@ -27,8 +39,9 @@ parser.add_argument(
 my_namespace = parser.parse_args()
 def urlWork():
     try:
-        infoDict=logics.getInfo(my_namespace.chars,my_namespace.limit)
-        return infoDict
+        if my_namespace.source:
+            infoDict=logics.getInfo(my_namespace.source,my_namespace.limit)
+            return infoDict
     except:
         print('ERROR URL')
         return ''
@@ -67,6 +80,10 @@ print(TITLE)
 try:
     cntr = 0
     infoDict=urlWork()
+    if my_namespace.version:
+        os.system('clear')
+        print('VERSION = '+version.version)
+        sys.exit()
     if my_namespace.json:
         try:
             os.system('clear')
@@ -74,6 +91,8 @@ try:
         except:
            print('stdout error')
     else:
+        os.system('clear')
+        print (TITLE)
         for info in infoDict.values():
             if cntr < my_namespace.limit:
                 print("DATE: "+info['DATE']+'\n'+"TITLE: "+info['TITLE']+'\n'+divider2+'\n\n'+"INFO: "+info['INFO']+'\n\n'+"LINK: "+info['LINK']+'\n'+"IMG: "+info['IMG']+'\n'+divider1)
