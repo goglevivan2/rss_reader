@@ -1,11 +1,11 @@
-from flask import Flask
+from flask import Flask,render_template
 from pynput.keyboard import Key, Listener
 import sys
 app = Flask(__name__)
-def web():
+def web(infoDic):
     @app.route("/")
     def hello():
-        return "Hello World!"
+        return render_template('index.html',dict=infoDic.values())
 
     while True:
         app.run()

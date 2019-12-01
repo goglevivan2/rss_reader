@@ -101,17 +101,19 @@ try:
         sys.exit()
 
     if my_namespace.web:
-        web.web()
+        web.web(infoDict)
+
+    if my_namespace.to_pdf:
+        pdfPath = path.join('./', 'news.pdf')
+        convert.write_smth_to_pdf(pdfPath,convert.makeString(infoDict))
+
     if my_namespace.json:
         try:
-            os.system('clear')
             logics.print_json(infoDict)
             sys.exit()
         except:
            print('stdout error')
-    elif my_namespace.to_pdf:
-        pdfPath = path.join('./', 'news.pdf')
-        convert.write_smth_to_pdf(pdfPath,convert.makeString(infoDict))
+
     else:
         os.system('clear')
         print (TITLE)

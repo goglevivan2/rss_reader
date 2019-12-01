@@ -5,32 +5,13 @@ import json
 import pdb
 
 
-def get_html(url):
-    r = requests.get(url)
-
-    return r.text
-
-
 def get_data(html):
     html
     soup = BeautifulSoup(html, 'lxml')
     h1=soup.text
-    # pdb.set_trace()
-    # h1=[]
-    # mediaSoup = soup.findAll('item')
-    # for x in mediaSoup:
-    #     h1.append(x.get('href'))
-    #
-    #
-    # # h1 = soup.find('div').find('div').find('div').find('div').find_all('div',{'class':'entry'}).text
 
     return h1
 
-def get_media(html):
-    soup = BeautifulSoup(html, 'lxml')
-    h1 = soup.find('media').find('item')
-    # h1 = soup.find('div',{'id':'feedBody'}).find('div',{'id':'feedContent'}).find('div',{'class':'entry'}).text
-    return h1
 
 def parseRSS(rss_url):
     return feedparser.parse(rss_url)
