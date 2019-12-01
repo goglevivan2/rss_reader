@@ -10,3 +10,9 @@ def changeOfDate(date):
     except Exception as ex:
         print('date change error: '+print(ex))
     return date
+
+def workCache(cache,info):
+    try:
+        cache[changeOfDate(info["DATE"])].append({'DATE':info['DATE'],'TITLE':str(info['TITLE']),'INFO':str(info["INFO"])})
+    except:
+        cache[changeOfDate(info["DATE"])] = [info]
