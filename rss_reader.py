@@ -3,7 +3,6 @@ import logics
 import os
 import version
 import sys
-import web
 import convert
 from os import path
 import cache
@@ -35,12 +34,6 @@ parser.add_argument(
 parser.add_argument(
     '--to-pdf',
     help='print  news on pdf file',
-    action='store_true'
-
-)
-parser.add_argument(
-    '--web',
-    help='web app starting',
     action='store_true'
 
 )
@@ -116,8 +109,8 @@ try:
         print('VERSION = '+version.version)
         sys.exit()
 
-    if my_namespace.web:
-        web.web(infoDict)
+#     if my_namespace.web:
+#         web.web(infoDict)
 
 
     if my_namespace.to_pdf:
