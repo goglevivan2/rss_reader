@@ -3,6 +3,8 @@ import logics
 import os
 import version
 import sys
+import web
+
 
 parser = argparse.ArgumentParser(description='RSS Newsreader system')
 parser.add_argument(
@@ -26,13 +28,18 @@ parser.add_argument(
     action='store_true'
 
 )
+parser.add_argument(
+    '--web',
+    help='web app starting',
+    action='store_true'
 
+)
 
 
 parser.add_argument(
     '--limit',
     type=int,
-    default=None,
+    default=1,
     help='limit of news(default=1)'
 )
 
@@ -84,6 +91,8 @@ try:
         os.system('clear')
         print('VERSION = '+version.version)
         sys.exit()
+    if my_namespace.web:
+        web.web()
     if my_namespace.json:
         try:
             os.system('clear')
