@@ -4,7 +4,8 @@ import os
 import version
 import sys
 import web
-
+import convert
+from os import path
 
 parser = argparse.ArgumentParser(description='RSS Newsreader system')
 parser.add_argument(
@@ -25,6 +26,13 @@ parser.add_argument(
 parser.add_argument(
     '--json',
     help='print the news as JSON in stdout',
+    action='store_true'
+
+)
+
+parser.add_argument(
+    '--to-pdf',
+    help='print  news on pdf file',
     action='store_true'
 
 )
@@ -91,14 +99,19 @@ try:
         os.system('clear')
         print('VERSION = '+version.version)
         sys.exit()
+
     if my_namespace.web:
         web.web()
     if my_namespace.json:
         try:
             os.system('clear')
             logics.print_json(infoDict)
+            sys.exit()
         except:
            print('stdout error')
+    elif my_namespace.to_pdf:
+        pdfPath = path.join('./', 'news.pdf')
+        convert.write_smth_to_pdf(pdfPath,convert.makeString(infoDict))
     else:
         os.system('clear')
         print (TITLE)
